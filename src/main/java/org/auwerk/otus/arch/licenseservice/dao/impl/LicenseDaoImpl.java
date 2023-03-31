@@ -35,7 +35,7 @@ public class LicenseDaoImpl implements LicenseDao {
 
     @Override
     public Uni<License> findByQueryId(PgPool pool, UUID queryId) {
-        return pool.preparedQuery("SELECT * FROM licenses WHERE query_id=$1 AND NOT deleted")
+        return pool.preparedQuery("SELECT * FROM licenses WHERE query_id=$1")
                 .execute(Tuple.of(queryId))
                 .map(rowSet -> {
                     final var rowSetIterator = rowSet.iterator();
