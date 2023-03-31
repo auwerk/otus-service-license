@@ -17,7 +17,6 @@ import lombok.Setter;
 public class LicenseDto {
     private UUID id;
     private UUID queryId;
-    private String userName;
     private String productCode;
     private LocalDateTime createdAt;
 }
