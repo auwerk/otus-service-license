@@ -10,7 +10,7 @@ import org.auwerk.otus.arch.licenseservice.dao.LicenseDao;
 import org.auwerk.otus.arch.licenseservice.domain.License;
 import org.auwerk.otus.arch.licenseservice.exception.LicenseCreatedByDifferentUserException;
 import org.auwerk.otus.arch.licenseservice.exception.LicenseNotFoundException;
-import org.auwerk.otus.arch.licenseservice.exception.LicenseQueryAlreadyAccepted;
+import org.auwerk.otus.arch.licenseservice.exception.LicenseQueryAlreadyAcceptedException;
 import org.auwerk.otus.arch.licenseservice.service.LicenseService;
 
 import io.quarkus.security.identity.SecurityIdentity;
@@ -37,7 +37,7 @@ public class LicenseServiceImpl implements LicenseService {
                 conn -> licenseDao.findByQueryId(pool, queryId)
                         .onItemOrFailure().transformToUni((license, failure) -> {
                             if (license != null) {
-                                throw new LicenseQueryAlreadyAccepted();
+                                throw new LicenseQueryAlreadyAcceptedException();
                             }
                             return licenseDao.insert(pool, queryId, getUserName(), productCode);
                         }));

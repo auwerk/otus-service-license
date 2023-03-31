@@ -18,7 +18,7 @@ import org.auwerk.otus.arch.licenseservice.dao.LicenseDao;
 import org.auwerk.otus.arch.licenseservice.domain.License;
 import org.auwerk.otus.arch.licenseservice.exception.LicenseCreatedByDifferentUserException;
 import org.auwerk.otus.arch.licenseservice.exception.LicenseNotFoundException;
-import org.auwerk.otus.arch.licenseservice.exception.LicenseQueryAlreadyAccepted;
+import org.auwerk.otus.arch.licenseservice.exception.LicenseQueryAlreadyAcceptedException;
 import org.auwerk.otus.arch.licenseservice.service.LicenseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -103,7 +103,7 @@ public class LicenseServiceImplTest {
                 .withSubscriber(UniAssertSubscriber.create());
 
         // then
-        subscriber.assertFailedWith(LicenseQueryAlreadyAccepted.class);
+        subscriber.assertFailedWith(LicenseQueryAlreadyAcceptedException.class);
 
         verify(licenseDao, never())
                 .insert(pool, queryId, USERNAME, PRODUCT_CODE);

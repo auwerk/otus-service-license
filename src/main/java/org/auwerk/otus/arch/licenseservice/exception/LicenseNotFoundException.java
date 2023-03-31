@@ -10,7 +10,7 @@ public class LicenseNotFoundException extends RuntimeException {
     private final UUID licenseId;
 
     public LicenseNotFoundException(UUID licenseId) {
-        super("license does not exist, id=" + licenseId);
+        super("license not found, id=" + licenseId);
         this.licenseId = licenseId;
     }
 }
