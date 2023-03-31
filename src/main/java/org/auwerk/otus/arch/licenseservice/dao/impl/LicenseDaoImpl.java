@@ -79,7 +79,9 @@ public class LicenseDaoImpl implements LicenseDao {
         return pool.preparedQuery("UPDATE licenses SET deleted=TRUE, deleted_at=$1 WHERE id=$2")
                 .execute(Tuple.of(LocalDateTime.now(), id))
                 .invoke(rowSet -> {
-                    throw new DaoException("license marking deleted failed, id=" + id);
+                    if (rowSet.rowCount() != 1) {
+                        throw new DaoException("license marking deleted failed, id=" + id);
+                    }
                 })
                 .replaceWithVoid();
     }
