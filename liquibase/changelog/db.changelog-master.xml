@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.19.xsd">
+
+    <changeSet id="01-create-licenses-table" author="auwerk">
+        <createTable tableName="licenses" remarks="Licenses">
+            <column name="id" type="uuid" remarks="License unique ID">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="query_id" type="uuid" remarks="License creation query unique ID">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="username" type="varchar(255)" remarks="User creator name">
+                <constraints nullable="false" />
+            </column>
+            <column name="product_code" type="varchar(64)" remarks="Product code">
+                <constraints nullable="false" />
+            </column>
+            <column name="deleted" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="datetime" remarks="License creation date/time">
+                <constraints nullable="false" />
+            </column>
+            <column name="deleted_at" type="datetime" remarks="License deletion date/time" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
